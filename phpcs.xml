@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<ruleset name="wpfs">
+    <description>wpfs conventions</description>
+    <rule ref="PSR12" />
+</ruleset>
