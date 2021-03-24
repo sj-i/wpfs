@@ -29,7 +29,7 @@
   "require": {
     "php": "^8.0",
     "ext-ffi": "*",
-    "sj-i/php-fuse": "0.1.0",
+    "sj-i/php-fuse": "0.2.0",
     "jgrossi/corcel": "^5.0",
     "php-di/php-di": "^6.3",
     "symfony/console": "^5.2"

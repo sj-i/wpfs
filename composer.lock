@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cbd683f2e5702447622d9a3fa8f0c9de",
+    "content-hash": "7e96c5d1bb3174d2ae5f8641ba69476f",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -755,6 +755,62 @@
             "time": "2021-02-24T17:30:44+00:00"
         },
         {
+            "name": "nikic/php-parser",
+            "version": "v4.10.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikic/PHP-Parser.git",
+                "reference": "c6d052fc58cb876152f89f532b95a8d7907e7f0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/c6d052fc58cb876152f89f532b95a8d7907e7f0e",
+                "reference": "c6d052fc58cb876152f89f532b95a8d7907e7f0e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-tokenizer": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "ircmaxell/php-yacc": "^0.0.7",
+                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
+            },
+            "bin": [
+                "bin/php-parse"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpParser\\": "lib/PhpParser"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Popov"
+                }
+            ],
+            "description": "A PHP parser written in PHP",
+            "keywords": [
+                "parser",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/nikic/PHP-Parser/issues",
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.10.4"
+            },
+            "time": "2020-12-20T10:01:03+00:00"
+        },
+        {
             "name": "opis/closure",
             "version": "dev-master",
             "source": {
@@ -994,6 +1050,57 @@
             "time": "2020-10-12T12:39:22+00:00"
         },
         {
+            "name": "phpstan/phpdoc-parser",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpdoc-parser.git",
+                "reference": "2269e476268a46e1a9b71fef61a6e5584b819b74"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/2269e476268a46e1a9b71fef61a6e5584b819b74",
+                "reference": "2269e476268a46e1a9b71fef61a6e5584b819b74",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "phing/phing": "^2.16.3",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.12.60",
+                "phpstan/phpstan-strict-rules": "^0.12.5",
+                "phpunit/phpunit": "^7.5.20",
+                "symfony/process": "^5.2"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PHPStan\\PhpDocParser\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPDoc parser with support for nullable, intersection and generic types",
+            "support": {
+                "issues": "https://github.com/phpstan/phpdoc-parser/issues",
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/0.5.2"
+            },
+            "time": "2021-03-22T17:32:47+00:00"
+        },
+        {
             "name": "psr/container",
             "version": "dev-master",
             "source": {
@@ -1101,21 +1208,29 @@
         },
         {
             "name": "sj-i/php-fuse",
-            "version": "v0.1.0",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sj-i/php-fuse.git",
-                "reference": "63f7a31b104ce4c9c57489611d7f08b6e16db4d6"
+                "reference": "aed52c17b348b2888a224292079fe14eb69d56ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sj-i/php-fuse/zipball/63f7a31b104ce4c9c57489611d7f08b6e16db4d6",
-                "reference": "63f7a31b104ce4c9c57489611d7f08b6e16db4d6",
+                "url": "https://api.github.com/repos/sj-i/php-fuse/zipball/aed52c17b348b2888a224292079fe14eb69d56ec",
+                "reference": "aed52c17b348b2888a224292079fe14eb69d56ec",
                 "shasum": ""
             },
             "require": {
                 "ext-ffi": "*",
-                "php": "^7.4|^8.0"
+                "php": "^7.4|^8.0",
+                "sj-i/phpdoc-type-reader": "0.0.3"
+            },
+            "require-dev": {
+                "jetbrains/phpstorm-stubs": "dev-master",
+                "php-coveralls/php-coveralls": "^2.4",
+                "phpunit/phpunit": "9.5",
+                "squizlabs/php_codesniffer": "^3.5",
+                "vimeo/psalm": "^4.6"
             },
             "type": "library",
             "autoload": {
@@ -1141,9 +1256,65 @@
             ],
             "support": {
                 "issues": "https://github.com/sj-i/php-fuse/issues",
-                "source": "https://github.com/sj-i/php-fuse/tree/v0.1.0"
+                "source": "https://github.com/sj-i/php-fuse/tree/v0.2.0"
             },
-            "time": "2021-03-01T23:17:16+00:00"
+            "time": "2021-03-23T22:53:45+00:00"
+        },
+        {
+            "name": "sj-i/phpdoc-type-reader",
+            "version": "v0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sj-i/phpdoc-type-reader.git",
+                "reference": "024c4a33d1489a6847844eda68bf8075a81e5abf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sj-i/phpdoc-type-reader/zipball/024c4a33d1489a6847844eda68bf8075a81e5abf",
+                "reference": "024c4a33d1489a6847844eda68bf8075a81e5abf",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^4.10",
+                "php": "^7.4|^8.0",
+                "phpstan/phpdoc-parser": "0.5.x-dev"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4",
+                "php-coveralls/php-coveralls": "9999999-dev",
+                "phpunit/phpunit": "^9.0",
+                "psalm/plugin-mockery": "^0.7.0",
+                "squizlabs/php_codesniffer": "^3.5",
+                "vimeo/psalm": "^4.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpDocTypeReader\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "sji",
+                    "homepage": "https://twitter.com/sji_ch"
+                }
+            ],
+            "description": "A library for reading types from phpdoc",
+            "keywords": [
+                "generics",
+                "php",
+                "phpdoc",
+                "type"
+            ],
+            "support": {
+                "issues": "https://github.com/sj-i/phpdoc-type-reader/issues",
+                "source": "https://github.com/sj-i/phpdoc-type-reader/tree/v0.0.3"
+            },
+            "time": "2021-03-21T16:08:51+00:00"
         },
         {
             "name": "symfony/console",
@@ -3095,62 +3266,6 @@
                 "source": "https://github.com/cweiske/jsonmapper/tree/master"
             },
             "time": "2020-04-16T18:48:43+00:00"
-        },
-        {
-            "name": "nikic/php-parser",
-            "version": "v4.10.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "c6d052fc58cb876152f89f532b95a8d7907e7f0e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/c6d052fc58cb876152f89f532b95a8d7907e7f0e",
-                "reference": "c6d052fc58cb876152f89f532b95a8d7907e7f0e",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "ircmaxell/php-yacc": "^0.0.7",
-                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
-            },
-            "bin": [
-                "bin/php-parse"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpParser\\": "lib/PhpParser"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov"
-                }
-            ],
-            "description": "A PHP parser written in PHP",
-            "keywords": [
-                "parser",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.10.4"
-            },
-            "time": "2020-12-20T10:01:03+00:00"
         },
         {
             "name": "openlss/lib-array2xml",
@@ -5380,7 +5495,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "ext-ffi": "*"
     },
     "platform-dev": [],
