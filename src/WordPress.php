@@ -17,8 +17,9 @@ interface WordPress
 {
     public function isDirectory(string $path): bool;
     public function getPost(string $path): ?string;
+    /** @return string[] */
     public function getPostNamesInDirectory(string $path): array;
-    public function updatePost(string $path, string $post_content);
+    public function updatePost(string $path, string $post_content): void;
     public function createPost(string $path): ?string;
     public function deletePost(string $path): void;
     public function renamePost(string $from, string $to): void;

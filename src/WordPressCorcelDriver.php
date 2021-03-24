@@ -13,11 +13,15 @@ declare(strict_types=1);
 
 namespace Wpfs;
 
-use Corcel\Model\Page;
 use Corcel\Model\Post;
 
 final class WordPressCorcelDriver implements WordPress
 {
+    /** @var array<string, string> */
+    private array $path_to_slug_cache = [];
+    /** @var array<string, string> */
+    private array $slug_to_path_cache = [];
+
     public function isDirectory(string $path): bool
     {
         return $path === '/';
@@ -25,23 +29,34 @@ final class WordPressCorcelDriver implements WordPress
 
     public function getPost(string $path): ?string
     {
-        /** @var ?Page $page */
-        $page = Post::slug($this->getSlugFromPath($path))->first();
-        if (is_null($page)) {
+        /** @var ?Post $post */
+        $post = Post::find($this->getIdFromPath($path));
+        if (is_null($post)) {
             return null;
         }
-        return $page->post_content;
+        $post_content = $post->post_content;
+        assert(is_null($post_content) or is_string($post_content));
+        return $post_content;
     }
 
+    /** @return string[] */
     public function getPostNamesInDirectory(string $path): array
     {
-        return Post::all()->map(fn (Post $post) => $this->getPathFromSlug($post->post_name))->toArray();
+        /** @var \Illuminate\Database\Eloquent\Collection $all */
+        $all = Post::all();
+        /** @var string[] */
+        return $all->map(
+            function (Post $post): string {
+                assert(is_string($post->ID) and is_string($post->post_name));
+                return $this->getPathFromSlug($post->ID . '_' . $post->post_name);
+            }
+        )->toArray();
     }
 
     public function updatePost(string $path, string $post_content): void
     {
-        /** @var ?Post $page */
-        $post = Post::slug($this->getSlugFromPath($path))->first();
+        /** @var ?Post $post */
+        $post = Post::find($this->getIdFromPath($path));
         if (is_null($post)) {
             return;
         }
@@ -49,19 +64,20 @@ final class WordPressCorcelDriver implements WordPress
         $post->update();
     }
 
-    public function createPost(string $path): ?string
+    public function createPost(string $path): string
     {
         $post = new Post();
         $post->post_name = $this->getSlugFromPath($path);
         $post->post_title = 'new post';
         $post->post_type = 'post';
         $post->save();
+        return '';
     }
 
     public function deletePost(string $path): void
     {
-        /** @var ?Post $page */
-        $post = Post::slug($this->getSlugFromPath($path))->first();
+        /** @var ?Post $post */
+        $post = Post::find($this->getIdFromPath($path));
         if (is_null($post)) {
             return;
         }
@@ -71,8 +87,8 @@ final class WordPressCorcelDriver implements WordPress
 
     public function renamePost(string $from, string $to): void
     {
-        /** @var ?Post $page */
-        $post = Post::slug($this->getSlugFromPath($from))->first();
+        /** @var ?Post $post */
+        $post = Post::find($this->getIdFromPath($from));
         if (is_null($post)) {
             return;
         }
@@ -81,13 +97,39 @@ final class WordPressCorcelDriver implements WordPress
         // clear cache
     }
 
-    private function getSlugFromPath(string $path)
+    private function getIdFromPath(string $path): string
     {
-        // get from cache
+        preg_match('/^\/([\d]+_)/', $path, $matches);
+        return $matches[1];
     }
 
-    private function getPathFromSlug(string $slug)
+    private function getSlugFromPath(string $path): string
     {
-        // get from cache
+        $path = substr($path, 1);
+        if (isset($this->path_to_slug_cache[$path])) {
+            return $this->path_to_slug_cache[$path];
+        }
+        return $this->tryUnsanitizePath($path);
+    }
+
+    private function getPathFromSlug(string $slug): string
+    {
+        if (!isset($this->slug_to_path_cache[$slug])) {
+            $this->slug_to_path_cache[$slug] = $path = $this->sanitizePath($slug);
+            $this->path_to_slug_cache[$path] = $slug;
+        }
+        return $this->slug_to_path_cache[$slug];
+    }
+
+    private function sanitizePath(string $slug): string
+    {
+        $slug = urldecode($slug);
+        return str_replace('/', '_', $slug);
+    }
+
+    private function tryUnsanitizePath(string $path): string
+    {
+        $path = preg_replace('/^[\d]+_/', '', $path);
+        return str_replace('_', '/', $path);
     }
 }
