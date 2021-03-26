@@ -62,7 +62,7 @@ final class Wpfs implements FilesystemInterface
         if (!$this->word_press->isDirectory($path)) {
             return Errno::ENOTDIR;
         }
-        foreach ($this->word_press->getPostNamesInDirectory($path) as $key => $value) {
+        foreach ($this->word_press->getPostNamesInDirectory($path) as $value) {
             $filler($buf, $value, null, 0);
         }
 
