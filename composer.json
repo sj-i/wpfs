@@ -16,6 +16,9 @@
       "homepage": "https://twitter.com/sji_ch"
     }
   ],
+  "bin": [
+    "wpfs"
+  ],
   "autoload": {
     "psr-4": {
       "Wpfs\\": "src"
